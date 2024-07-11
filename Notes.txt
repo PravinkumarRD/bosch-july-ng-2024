@@ -1,0 +1,437 @@
+Why Angular Framework?
+
+1) One framework for Web, Desktop and Mobile applications
+2) Speed and Performance
+3) Angular framework is modular [You install only those which you need and deploy the same which will reduce the bundle size. Smaller is the bundle size faster will be the rendering]
+4) You can also build your application in modular way
+5) Eager Loading and Lazy loading
+6) You can build/develop SPA - Single Page Application
+7) To build SPA, Angular offers Routing library - @angular/router
+8) Angular offers Component Development [Part of a webpage] [Offers number of in-build components]
+9) Angular offers different compilation models - 
+	I) JIT Compilation [Development] (II) AoT - Ahead-Of-Time Compilation - Production [Default Compilation starting with Angular version 9]
+10) Angular uses Ivy rendering engine [Performance]
+11) Offers multiple language support for development
+	I) Typescript (II)JavaScript/ECMAScript (III) Dart
+12) Angular offers rich data binding support
+	[Source-To-Destination/Destination-To-Source/Two-Way]
+13) Data Transformation/Formatting - Pipes
+	Angular offers number of in-built pipes/ You can also develop your own pipes
+14) Angular offers number of Directives [In-built/Custom]
+	To Change/add new behaviour to HTML/Component elements
+15) Angular offers IoC container [Injector] out-of-the-box along with Dependency Injection [D.I.]
+16) Angular offers Service based architecture [In-built/Custom]
+	- Reusability of Data and Logic [Singleton pattern]
+17) Angular offers Standalone Development of - [Component, Directive/ Pipes] [Angular -18]
+18) Angular has Module based [NgModule] development
+19) In Angular framework you can develop two types of Applications - 
+	1) Angular application
+	2) Angular Library - Can be used only in other Angular applications
+20) Angular Elements - You can use Angular Element in Non-Angular applications [For Ex. React JS/ Vue/ ...]
+21) Angular offers HTTP support - [GET/POST/PUT/DELETE] operations
+	@angular/common/http
+22) Angular comes with support of Material Library [Angular Material Library]
+	In-built components and CDK - Component Development Kit
+23) Angular offers rich forms
+	I) Template Driven Form
+	II) Reactive Form
+24) Zone.js - where you component is rendered
+25) CDC - Change Detection Cycle which monitors the changes in data binding and updates the UI accordingly. It works inside the Zone
+26) Angular 18 - Signals [Zoneless] implementation
+27) Angular offers a CLI - [Command Line Interface] tool - @angular/cli
+	It's a tool to create Angular applications/libraries and add/install the dependencies, Add the required components, directives, pipes, services, classes, interfaces, enums ... with default code
+28) Angular application comes with Testing framework integration [Jasmine]
+	Write the Unit test cases/E2E testing
+29) To run the test cases, use Karma test runner tool
+30) Angular support SSR - Server Side Rendering out-of-the-box [18V]
+31) Angular supports rich animation by providing animation library [@angular/animations]
+32) Angular supports Internationalization using i18n library
+33) Angular uses Observable-Observer pattern using RxJS library
+	RxJS - Reactive Extensions for JavaScript Library [Third-party]
+
+
+Steps to create first Angular application - 
+
+1) Install Angular CLI tool globally on your machine [NPM]
+	npm install @angular/cli --global
+2) Create new Angular application
+
+	ng new application-name
+		This command will create Angular application without NgModule
+	ng new application-name --standalone=false
+		This command will create Angular application with NgModule
+3) Change the directory to your angular application
+	cd application-name
+4) Run your application using below command - 
+	ng serve
+		This will start the development web server and run your application on default port-4200
+
+
+Building Blocks of Angular Framework - 
+1) NgModule [Will not be there if you are using standalone development]
+2) Component
+3) Directive
+4) Pipe
+5) Service
+
+All these major blocks are developed using classes. You can use Metadata provided by Angular framework to tell how Angular should treat each class. All Metadata come from @angular/core library
+
+For Example - 
+
+import { Component, Pipe, Directive, Injectable, NgModule } from '@angular/core'; //Here component is metadata
+
+
+//Decorator Pattern
+@Component({
+	properties...
+})
+export class MyComponent{
+
+}
+
+@Pipe({
+	properties...
+})
+export class DatePipe{
+...
+}
+
+@NgModule({
+	properties
+})
+export class BoschModule{
+
+}
+
+@Injectable({
+	properties
+})
+export class MyService{
+
+}
+
+@Directive({
+	properties
+})
+export class MyDirective{
+
+}
+
+-------------------
+
+@NgModule({
+  imports:[],//You will add all the other modules as dependencies
+  exports:[TwoComponent],//Anything you want to access from this module into other module
+  declarations:[OneComponent,TwoComponent, OnePipe,TwoPipe, Dir1Directive,Dir2Directive], //Registration of Component, Directive, Pipe
+  providers:[], //Services registration
+  //The component which you want to see when the first page is rendered
+})
+export class  LeaveModule{
+
+}
+
+Introduction to PoC - Bosch Events Portal [Hr/Employee]
+	It must be SPA. It must have authenticate and authorization along with security trimming. It will be MEAN stack application
+
+	[M - MongoDB, E - Express JS, A - Angular, N - Node JS]
+	Employee Role - 
+		1) Register yourself in the portal
+		2) Employee can see other employees details
+		3) Employee can see all the upcoming events
+		4) Employee can see the details of an event
+		5) Employee can register for an event
+		6) Employee can give feedback for the attended event
+	Hr Role - 
+		All the responsibilities of Employee
+		1) Scheduling an event [Add New, Postpone, Remove]
+		2) Take feedback and generate reports
+
+Install MongoDB Community Edition
+Download MongoDB Shell
+
+PoC Structure - Feature-wise Folder Structure
+
+
+	app
+		app.component.[ts,html,css,spec.ts]
+		app.config.ts
+		employees
+			components
+				employees-list
+					employees-list.[ts,html,css,spec.ts]
+				employee-details
+					employee-details.[ts,html,css,spec.ts]
+				register-employee
+					register-employee.[ts,html,css,spec.ts]
+
+			models
+				employee.ts/spec.ts
+			pipes
+				*.pipe.ts/spec.ts
+			directives
+				*.directive.ts/sepc.ts
+			services
+				employee.service.ts/sepc.ts
+		events
+			...
+		security
+			...
+		navigation
+			...
+		home
+			...
+		shared
+			...
+		
+					
+Introduction to Component in Angular
+	1) It is a part of a webpage
+	2) It is used for displaying the UI on your browser
+	3) It extends the vocabulary of HTML
+	4) It is mainly designed using three parts - [HTML, CSS and JavaScript/Typescript]
+
+Component Template Types - 
+	1) In-line Template [Use the in-line template when you have 2-3 lines html code]
+		i) Single/double quotes
+		ii) Backtick syntax [Multiline Formatting]
+	2) External/Linked Template [.html]
+
+
+ng generate command
+
+1) ng generate -help
+
+How does pipe work internally?
+
+All metadata comes from @angular/core package/library
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+	name:'date'
+})
+export class DatePipe implements PipeTransform {
+	transform(value:unknown, ...args:unknown[]):unknown{
+		//Check if there is/are any arguments
+		//Logic of the data transformation
+		/return the formatted value
+	}
+}
+
+
+@Pipe({
+	name:'dateGlobalization'
+})
+date-globalization
+
+
+|dateGlobalization [Default Locale - en-IN]
+
+|dateGlobalization:'ja-JP'
+
+
+
+Introduction to MongoDB
+
+RDBMS							NoSQL
+	Oracle, MySQL, Microsoft SQL Server..			MongoDB Server
+		Databases						Database
+			Table						    Collection
+				Rows/Cols					Documents
+
+
+What is Document?
+Answer - It is a JSON like object
+
+{
+	employeeId:2393,
+	employeeName:'Some Name',
+	address:{
+		areaName:'ABCD',
+		zipCode:829332,
+		mobiles:[]
+	}
+}
+
+Mongo Shell - Writing the queries
+
+1) List all existing databases of my server
+	show dbs;
+2) Create new database
+	use bosch-july-events-db;
+3) Create/add new collection in the database
+	db.createCollection("users");
+	db.createCollection("events");
+	db.createCollection("employees");
+4) Add new document(s) into a collection
+	db.users.insertOne({...});
+	db.events.insertMany([{...},{...}]);
+5) Fetch all the documents
+	db.events.find();
+	db.events.find({eventId:1002});
+	db.events.findOne();
+	db.events.findOne({eventId:1002});
+6) Delete documents
+	db.users.deleteOne({email:'manish.kaushik@bosch.com'})
+	db.users.deleteMany({});
+
+------------------------
+
+Working with REST API given by the trainer
+
+To start with the API - run below command in VS Code Terminal - 
+
+	node bosch-rest-server.js
+
+API Endpoints where we have to send the requests to perform CRUD operations with MongoDB database - 
+
+Events Endpoints
+
+http://localhost:9090/api/events [GET Request]
+http://localhost:9090/api/events/1001 [GET Request] [Parameterized URL]
+http://localhost:9090/api/events [POST Request]
+
+Employees Endpoints
+
+http://localhost:9090/api/employees [GET Request]
+http://localhost:9090/api/employees/1001 [GET Request] [Parameterized URL]
+http://localhost:9090/api/employees [POST Request]
+
+Authentication - 
+
+Registering the User - 
+http://localhost:9090/api/users [POST]
+http://localhost:9090/api/users/authenticate [POST]
+
+
+-------------------------
+Introduction to Services in Angular application
+
+Why Services?
+
+1) Sharing the data and logic across the application
+2) Using Singleton pattern [One instance of service throughout the application/component hierarchy]
+	Angular framework comes with built-in IoC Container and Dependency Injection
+3) Easy testing
+4) Simple MVVM [Model-View-ViewModel] pattern
+5) Loose Coupling architecture
+
+IoC - Injector and Dependency Injection
+
+Angular comes with built-in HTTP Service support
+
+	@angular/common/http
+		HttpClientModule [Old]
+			HttpClient [Use this service via dependency injection]
+	In Angular 18 apps, please register a function in appconfig - 
+		provideHttpClient() with options
+	Now we can use HttpClient service via injection in our services, components, directives etc.
+			
+HttpClient service offers number of Http Methods - 
+	
+	T-Type
+
+	1) get()/get<T>(url/endpoint,reqConfigOptions:{}):Observable<T>
+	2) post()/post<T>(url/endpoint,data,reqConfigOptions:{}):Observable<T>
+	3) put()/put<T>(url/endpoint,data,reqConfigOptions:{}):Observable<T>
+	4) delete()/delete<T>(url/endpoint,data,reqConfigOptions:{}):Observable<T>
+
+Introduction to Observable [Comes from a Library called RxJS]
+
+RxJS - Reactive Extensions for JavaScript Library [Core object is Observable]
+
+Angular Component/Directive Lifecycle - 
+	1) Angular will create an instance of your component
+	2) It renders your view [First Render]
+	3) Waits for the data binding changes [By running CDC - checks the changes into properties which are bound with the view]
+	4) Render the component with the changes
+	5) If component has child/children and/or directives usage, it will follow the same above process for its child/children components
+	6) And finally destroys the component by removing its View from DOM
+
+During this lifecycle, Angular component offers lifecycle hooks/methods using which we can run our custom logic in our component. 
+The hooks/methods provided by Angular component lifecycle work in sequence. 
+
+	Two categories of hooks - 
+		1) The hook which gets executed exactly once in a component lifecycle
+			The hook/method name ends with Init keyword
+		2) Hooks which get executed multiple times as and when the component is re-rendered
+
+What is SPA?
+	1) Single Page Application
+
+In order to work with SPA, you need to use Angular Routing library - @angular/router
+
+	1) Route Declaration [Interface - Route, Type - Routes]
+
+		http://localhost:4200 [Default Route] [DefaultComponent]
+		http://localhost:4200/home [Specific Route] [BoschHomeComponent]
+		http://localhost:4200/employees [Specific Route] [EmployeesListComponent]
+		http://localhost:4200/events [Specific Route] [EventsListComponent]
+		http://localhost:4200/events/new [Specific Route] [RegisterEventComponent]
+		http://localhost:4200/events/1002 [Parameterized Route] [EventDetailsComponent]
+		http://localhost:4200/login [Specific Route] [LoginComponent]
+
+	2) Router library offers a placeholder for rendering components associated with the given route - 
+		<router-outlet></router-outlet>
+	3) Directives to configure router links
+	4) Programmatic routing service
+	5) To read URL parameter value/Query String value, it offers services
+	6) Route Protection [Route Guards]
+
+Security - 
+
+	security/components/login
+	security/models/user
+	security/services/security
+
+http://localhost:9090/api/users
+
+
+Angular Forms - 
+
+1) Template Driven Form
+Two-Way Data Binding - [(ngModel)] -
+
+	@angular/forms
+		FormsModule
+			ngModel
+		
+
+Any form which is designed using Two-Way data binding syntax is called as Template Driven form
+
+
+2) Reactive Forms - 
+	@angular/forms
+		ReactiveFormsModule
+			FormGroup, FormControl, Validators
+
+
+export class Event {
+	eventForm:FormGroup=new FormGroup({
+    		eventId: new FormControl(state, Validators.required),
+    		eventCode: new FormControl(state, [Validators.required, Validators.minlength(6),Validators.malength(6)]),
+    		eventName: new FormControl(),
+    		description: new FormControl(),
+    		startDate: new FormControl(),
+    		endDate: new FormControl(),
+    		fees: new FormControl(),
+    		seatsFilled: new FormControl(),
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
